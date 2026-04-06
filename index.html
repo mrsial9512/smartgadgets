@@ -7,115 +7,157 @@
 
 <style>
 body {
-    margin: 0;
-    font-family: Arial;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: white;
+  margin:0;
+  font-family: Arial;
+  background:#0f2027;
+  color:white;
 }
 
-header {
-    text-align: center;
-    padding: 20px;
-    background: #111;
-    font-size: 24px;
+/* NAVBAR */
+nav {
+  display:flex;
+  justify-content:space-between;
+  padding:15px 30px;
+  background:#111;
 }
 
+nav h2 {color:#ff4b2b;}
+
+/* HERO */
 .hero {
-    text-align: center;
-    padding: 50px 20px;
+  text-align:center;
+  padding:40px;
 }
 
-.hero h1 {
-    font-size: 40px;
-}
-
-button {
-    background: #ff4b2b;
-    border: none;
-    padding: 10px 20px;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
+/* PRODUCTS */
 .products {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
+  display:flex;
+  gap:20px;
+  flex-wrap:wrap;
+  justify-content:center;
 }
 
 .product {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 15px;
-    width: 250px;
-    text-align: center;
-    transition: 0.3s;
+  background:#1c1c1c;
+  padding:20px;
+  width:250px;
+  border-radius:10px;
+  text-align:center;
 }
 
-.product:hover {
-    transform: scale(1.05);
+.product img {
+  width:100%;
+  border-radius:10px;
 }
 
-img {
-    width: 100%;
-    border-radius: 10px;
+button {
+  background:#ff4b2b;
+  border:none;
+  padding:10px;
+  color:white;
+  cursor:pointer;
+  border-radius:20px;
 }
 
-.cart {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: red;
-    padding: 10px;
-    border-radius: 50%;
+/* CART */
+.cart-box {
+  position:fixed;
+  right:0;
+  top:0;
+  width:300px;
+  height:100%;
+  background:#222;
+  padding:20px;
+  display:none;
 }
 
+.cart-box h3 {margin-top:0}
+
+/* FOOTER */
+footer {
+  text-align:center;
+  padding:20px;
+  background:#111;
+  margin-top:20px;
+}
 </style>
 </head>
 
 <body>
 
-<header>SmartGadgets 🚀</header>
+<nav>
+<h2>SmartGadgets</h2>
+<button onclick="toggleCart()">Cart (<span id="count">0</span>)</button>
+</nav>
 
-<div class="cart" id="cart">0</div>
-
-<section class="hero">
+<div class="hero">
 <h1>Upgrade Your Lifestyle</h1>
-<p>Best Smart Gadgets Available</p>
-</section>
+<p>Premium Smart Products</p>
+</div>
 
-<section class="products">
+<div class="products">
 
 <div class="product">
 <img src="https://images.unsplash.com/photo-1585386959984-a41552231658">
 <h3>Smart Watch</h3>
 <p>$49</p>
-<button onclick="addToCart()">Add to Cart</button>
+<button onclick="addToCart('Smart Watch')">Add</button>
 </div>
 
 <div class="product">
 <img src="https://images.unsplash.com/photo-1518444065439-e933c06ce9cd">
-<h3>Wireless Earbuds</h3>
+<h3>Earbuds</h3>
 <p>$29</p>
-<button onclick="addToCart()">Add to Cart</button>
+<button onclick="addToCart('Earbuds')">Add</button>
 </div>
 
 <div class="product">
 <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
-<h3>Smart Speaker</h3>
+<h3>Speaker</h3>
 <p>$59</p>
-<button onclick="addToCart()">Add to Cart</button>
+<button onclick="addToCart('Speaker')">Add</button>
 </div>
 
-</section>
+</div>
+
+<!-- CART -->
+<div class="cart-box" id="cartBox">
+<h3>Your Cart</h3>
+<ul id="items"></ul>
+
+<h4>Checkout</h4>
+<input placeholder="Name"><br><br>
+<input placeholder="Address"><br><br>
+
+<button onclick="order()">Order via WhatsApp</button>
+</div>
+
+<footer>
+© 2026 Smart Gadgets Store
+</footer>
 
 <script>
-let count = 0;
-function addToCart(){
-    count++;
-    document.getElementById("cart").innerText = count;
+let count=0;
+let items=[];
+
+function addToCart(name){
+  count++;
+  items.push(name);
+  document.getElementById("count").innerText=count;
+
+  let li=document.createElement("li");
+  li.innerText=name;
+  document.getElementById("items").appendChild(li);
+}
+
+function toggleCart(){
+  let box=document.getElementById("cartBox");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+function order(){
+  let msg="Order:\\n"+items.join("\\n");
+  window.open("https://wa.me/?text="+encodeURIComponent(msg));
 }
 </script>
 
