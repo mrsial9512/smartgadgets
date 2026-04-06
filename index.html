@@ -3,112 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartGadgets Pro</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>SmartGadgets Ultra</title>
 
 <style>
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: #0f172a;
-  color: white;
+  margin:0;
+  font-family: Arial;
+  background:#0f172a;
+  color:white;
 }
 
-/* NAVBAR */
+/* HEADER */
 header {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px 40px;
-  background: rgba(255,255,255,0.05);
+  display:flex;
+  justify-content:space-between;
+  padding:15px 30px;
+  background:#111;
 }
 
-.logo {
-  color: #ff5733;
-  font-weight: bold;
-}
-
-.hero {
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.hero h1 {
-  font-size: 45px;
-}
-
-.btn {
-  background: linear-gradient(45deg,#ff5733,#ff2e63);
-  padding: 12px 25px;
-  border-radius: 30px;
-  border: none;
-  color: white;
-  cursor: pointer;
+.logo {color:#ff5733;font-size:20px;font-weight:bold;}
+button {
+  background:#ff5733;
+  border:none;
+  padding:8px 15px;
+  color:white;
+  border-radius:20px;
+  cursor:pointer;
 }
 
 /* PRODUCTS */
 .products {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 40px;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  padding:20px;
 }
-
 .card {
-  background: rgba(255,255,255,0.05);
-  margin: 15px;
-  padding: 20px;
-  border-radius: 20px;
-  width: 230px;
-  text-align: center;
-  transition: 0.3s;
+  background:#1c1c1c;
+  padding:15px;
+  width:200px;
+  border-radius:10px;
+  text-align:center;
 }
-
-.card:hover {
-  transform: translateY(-10px);
-}
-
-.card img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-/* TESTIMONIALS */
-.testimonials {
-  text-align: center;
-  padding: 50px;
-}
-
-.review {
-  background: rgba(255,255,255,0.05);
-  margin: 15px auto;
-  padding: 20px;
-  border-radius: 10px;
-  width: 60%;
-}
+.card img {width:100%;}
 
 /* CART */
 .cart {
-  position: fixed;
-  right: 20px;
-  top: 100px;
-  background: #111;
-  padding: 15px;
-  border-radius: 15px;
-  width: 250px;
+  position:fixed;
+  right:-300px;
+  top:0;
+  width:300px;
+  height:100%;
+  background:#222;
+  padding:20px;
+  transition:0.3s;
+}
+.cart.active {right:0;}
+
+.qty {
+  display:flex;
+  justify-content:center;
+  gap:5px;
 }
 
-input {
-  width: 90%;
-  padding: 8px;
-  margin: 5px 0;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 30px;
-  opacity: 0.6;
+/* CHECKOUT */
+.checkout {
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:black;
+  padding:20px;
 }
 </style>
 </head>
@@ -116,95 +84,115 @@ footer {
 <body>
 
 <header>
-  <div class="logo">SmartGadgets</div>
-  <div>Cart: <span id="count">0</span></div>
+<div class="logo">SmartGadgets</div>
+<button onclick="toggleCart()">Cart</button>
 </header>
 
-<section class="hero">
-  <h1>Future of Smart Living</h1>
-  <p>Premium Gadgets for Modern Life</p>
-  <button class="btn">Shop Now</button>
-</section>
+<div class="products" id="products"></div>
 
-<section class="products">
-
-<div class="card">
-<img src="https://via.placeholder.com/200">
-<h3>Smart Watch</h3>
-<p>$49</p>
-<button class="btn" onclick="addItem('Watch',49)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/200">
-<h3>Earbuds</h3>
-<p>$29</p>
-<button class="btn" onclick="addItem('Earbuds',29)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/200">
-<h3>Smart Phone</h3>
-<p>$199</p>
-<button class="btn" onclick="addItem('Phone',199)">Add</button>
-</div>
-
-<div class="card">
-<img src="https://via.placeholder.com/200">
-<h3>Speaker</h3>
-<p>$39</p>
-<button class="btn" onclick="addItem('Speaker',39)">Add</button>
-</div>
-
-</section>
-
-<section class="testimonials">
-<h2>What Our Clients Say</h2>
-
-<div class="review">🔥 “Amazing store design, very modern!”</div>
-<div class="review">💯 “Fast delivery and smooth UI”</div>
-<div class="review">⭐ “Highly recommended developer”</div>
-
-</section>
-
-<div class="cart">
+<div class="cart" id="cartBox">
 <h3>Your Cart</h3>
-<ul id="cart"></ul>
+<div id="cartItems"></div>
 <p>Total: $<span id="total">0</span></p>
-
-<input placeholder="Name" id="name">
-<input placeholder="Address" id="address">
-
-<button class="btn" onclick="order()">Order WhatsApp</button>
+<button onclick="checkout()">Checkout</button>
 </div>
 
-<footer>
-© 2026 SmartGadgets Pro | Designed by You 🚀
-</footer>
+<div class="checkout" id="checkoutBox">
+<h2>Checkout</h2>
+
+<input id="name" placeholder="Name"><br><br>
+<input id="address" placeholder="Address"><br><br>
+
+<button onclick="placeOrder()">Place Order</button>
+</div>
 
 <script>
-let total = 0;
-let count = 0;
+let products=[
+{name:"Watch",price:50},
+{name:"Earbuds",price:30},
+{name:"Phone",price:200},
+{name:"Speaker",price:60}
+];
 
-function addItem(name,price){
-  let li = document.createElement("li");
-  li.innerText = name + " - $" + price;
-  document.getElementById("cart").appendChild(li);
+let cart=[];
 
-  total += price;
-  count++;
+function render(){
+let html="";
+products.forEach((p,i)=>{
+html+=`
+<div class="card">
+<img src="https://via.placeholder.com/200">
+<h3>${p.name}</h3>
+<p>$${p.price}</p>
+<button onclick="add(${i})">Add</button>
+</div>`;
+});
+document.getElementById("products").innerHTML=html;
+}
+render();
 
-  document.getElementById("total").innerText = total;
-  document.getElementById("count").innerText = count;
+function add(i){
+let found=cart.find(item=>item.name===products[i].name);
+if(found){
+found.qty++;
+}else{
+cart.push({...products[i],qty:1});
+}
+update();
 }
 
-function order(){
-  let name = document.getElementById("name").value;
-  let address = document.getElementById("address").value;
+function update(){
+let html="";
+let total=0;
 
-  let msg = "Order:%0AName:"+name+"%0AAddress:"+address+"%0ATotal:$"+total;
+cart.forEach((p,i)=>{
+total+=p.price*p.qty;
+html+=`
+<div>
+${p.name} ($${p.price})
+<div class="qty">
+<button onclick="change(${i},-1)">-</button>
+<span>${p.qty}</span>
+<button onclick="change(${i},1)">+</button>
+</div>
+<button onclick="remove(${i})">Remove</button>
+</div>`;
+});
 
-  window.open("https://wa.me/96891383634?text="+msg);
+document.getElementById("cartItems").innerHTML=html;
+document.getElementById("total").innerText=total;
+}
+
+function change(i,val){
+cart[i].qty+=val;
+if(cart[i].qty<=0) cart.splice(i,1);
+update();
+}
+
+function remove(i){
+cart.splice(i,1);
+update();
+}
+
+function toggleCart(){
+document.getElementById("cartBox").classList.toggle("active");
+}
+
+function checkout(){
+document.getElementById("checkoutBox").style.display="block";
+}
+
+function placeOrder(){
+let name=document.getElementById("name").value;
+let address=document.getElementById("address").value;
+
+let text="Order:\n";
+cart.forEach(p=>{
+text+=p.name+" x"+p.qty+"\n";
+});
+
+let url="https://wa.me/96891383634?text="+encodeURIComponent(text);
+window.open(url);
 }
 </script>
 
