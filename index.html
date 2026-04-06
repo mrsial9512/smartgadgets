@@ -5,69 +5,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SmartGadgets Pro</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  font-family: 'Poppins', sans-serif;
+  background: #0f172a;
   color: white;
 }
 
+/* NAVBAR */
 header {
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
+  padding: 20px 40px;
+  background: rgba(255,255,255,0.05);
 }
 
-.logo { color: #ff5733; font-weight: bold; }
+.logo {
+  color: #ff5733;
+  font-weight: bold;
+}
 
 .hero {
   text-align: center;
-  padding: 80px 20px;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 45px;
 }
 
 .btn {
-  background: #ff5733;
-  padding: 10px 20px;
+  background: linear-gradient(45deg,#ff5733,#ff2e63);
+  padding: 12px 25px;
+  border-radius: 30px;
   border: none;
-  border-radius: 20px;
-  cursor: pointer;
   color: white;
+  cursor: pointer;
 }
 
+/* PRODUCTS */
 .products {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px;
 }
 
 .card {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
   margin: 15px;
   padding: 20px;
-  border-radius: 15px;
-  width: 200px;
+  border-radius: 20px;
+  width: 230px;
   text-align: center;
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: translateY(-10px);
 }
 
-.cart-box {
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+/* TESTIMONIALS */
+.testimonials {
+  text-align: center;
+  padding: 50px;
+}
+
+.review {
+  background: rgba(255,255,255,0.05);
+  margin: 15px auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 60%;
+}
+
+/* CART */
+.cart {
   position: fixed;
-  right: 10px;
-  top: 70px;
+  right: 20px;
+  top: 100px;
   background: #111;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 15px;
+  width: 250px;
 }
 
 input {
   width: 90%;
-  margin: 5px;
-  padding: 5px;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 30px;
+  opacity: 0.6;
 }
 </style>
 </head>
@@ -80,44 +121,66 @@ input {
 </header>
 
 <section class="hero">
-  <h1>Upgrade Your Lifestyle</h1>
-  <p>Premium Smart Products</p>
+  <h1>Future of Smart Living</h1>
+  <p>Premium Gadgets for Modern Life</p>
   <button class="btn">Shop Now</button>
 </section>
 
 <section class="products">
 
 <div class="card">
-  <h3>Smart Watch</h3>
-  <p>$49</p>
-  <button class="btn" onclick="addItem('Watch',49)">Add</button>
+<img src="https://via.placeholder.com/200">
+<h3>Smart Watch</h3>
+<p>$49</p>
+<button class="btn" onclick="addItem('Watch',49)">Add</button>
 </div>
 
 <div class="card">
-  <h3>Earbuds</h3>
-  <p>$29</p>
-  <button class="btn" onclick="addItem('Earbuds',29)">Add</button>
+<img src="https://via.placeholder.com/200">
+<h3>Earbuds</h3>
+<p>$29</p>
+<button class="btn" onclick="addItem('Earbuds',29)">Add</button>
 </div>
 
 <div class="card">
-  <h3>Smart Phone</h3>
-  <p>$199</p>
-  <button class="btn" onclick="addItem('Phone',199)">Add</button>
+<img src="https://via.placeholder.com/200">
+<h3>Smart Phone</h3>
+<p>$199</p>
+<button class="btn" onclick="addItem('Phone',199)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://via.placeholder.com/200">
+<h3>Speaker</h3>
+<p>$39</p>
+<button class="btn" onclick="addItem('Speaker',39)">Add</button>
 </div>
 
 </section>
 
-<div class="cart-box">
-  <h3>Your Cart</h3>
-  <ul id="cart"></ul>
-  <p>Total: $<span id="total">0</span></p>
+<section class="testimonials">
+<h2>What Our Clients Say</h2>
 
-  <h4>Checkout</h4>
-  <input placeholder="Name" id="name"><br>
-  <input placeholder="Address" id="address"><br>
+<div class="review">🔥 “Amazing store design, very modern!”</div>
+<div class="review">💯 “Fast delivery and smooth UI”</div>
+<div class="review">⭐ “Highly recommended developer”</div>
 
-  <button class="btn" onclick="order()">Order WhatsApp</button>
+</section>
+
+<div class="cart">
+<h3>Your Cart</h3>
+<ul id="cart"></ul>
+<p>Total: $<span id="total">0</span></p>
+
+<input placeholder="Name" id="name">
+<input placeholder="Address" id="address">
+
+<button class="btn" onclick="order()">Order WhatsApp</button>
 </div>
+
+<footer>
+© 2026 SmartGadgets Pro | Designed by You 🚀
+</footer>
 
 <script>
 let total = 0;
@@ -139,7 +202,7 @@ function order(){
   let name = document.getElementById("name").value;
   let address = document.getElementById("address").value;
 
-  let msg = "Order from SmartGadgets:%0AName: "+name+"%0AAddress: "+address+"%0ATotal: $"+total;
+  let msg = "Order:%0AName:"+name+"%0AAddress:"+address+"%0ATotal:$"+total;
 
   window.open("https://wa.me/96891383634?text="+msg);
 }
