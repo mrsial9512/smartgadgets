@@ -3,82 +3,120 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Gadgets Pro</title>
+<title>SmartGadgets Pro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin:0;
-  font-family: Arial;
-  background:#0f2027;
-  color:white;
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+
+body{
+background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
 }
 
 /* NAVBAR */
-nav {
-  display:flex;
-  justify-content:space-between;
-  padding:15px 30px;
-  background:#111;
+nav{
+display:flex;
+justify-content:space-between;
+padding:20px 50px;
+background:rgba(0,0,0,0.5);
+backdrop-filter:blur(10px);
 }
 
-nav h2 {color:#ff4b2b;}
+nav h2{color:#ff4b2b}
 
 /* HERO */
-.hero {
-  text-align:center;
-  padding:40px;
+.hero{
+text-align:center;
+padding:80px 20px;
+}
+
+.hero h1{
+font-size:50px;
+background:linear-gradient(to right,#ff4b2b,#ff416c);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.hero p{
+margin:20px 0;
+opacity:0.8;
+}
+
+/* BUTTON */
+.btn{
+background:linear-gradient(45deg,#ff4b2b,#ff416c);
+padding:12px 25px;
+border:none;
+border-radius:30px;
+color:white;
+cursor:pointer;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.1);
 }
 
 /* PRODUCTS */
-.products {
-  display:flex;
-  gap:20px;
-  flex-wrap:wrap;
-  justify-content:center;
+.products{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+padding:40px;
 }
 
-.product {
-  background:#1c1c1c;
-  padding:20px;
-  width:250px;
-  border-radius:10px;
-  text-align:center;
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+padding:20px;
+width:260px;
+border-radius:20px;
+text-align:center;
+transition:0.4s;
 }
 
-.product img {
-  width:100%;
-  border-radius:10px;
+.card:hover{
+transform:translateY(-10px) scale(1.05);
 }
 
-button {
-  background:#ff4b2b;
-  border:none;
-  padding:10px;
-  color:white;
-  cursor:pointer;
-  border-radius:20px;
+.card img{
+width:100%;
+border-radius:15px;
+}
+
+.price{
+color:#ff416c;
+font-weight:bold;
+margin:10px 0;
+}
+
+/* BADGE */
+.badge{
+position:absolute;
+background:red;
+padding:5px 10px;
+border-radius:10px;
+font-size:12px;
 }
 
 /* CART */
-.cart-box {
-  position:fixed;
-  right:0;
-  top:0;
-  width:300px;
-  height:100%;
-  background:#222;
-  padding:20px;
-  display:none;
+.cart{
+position:fixed;
+top:20px;
+right:20px;
+background:#ff4b2b;
+padding:12px;
+border-radius:50%;
 }
 
-.cart-box h3 {margin-top:0}
-
 /* FOOTER */
-footer {
-  text-align:center;
-  padding:20px;
-  background:#111;
-  margin-top:20px;
+footer{
+text-align:center;
+padding:20px;
+opacity:0.7;
 }
 </style>
 </head>
@@ -87,77 +125,49 @@ footer {
 
 <nav>
 <h2>SmartGadgets</h2>
-<button onclick="toggleCart()">Cart (<span id="count">0</span>)</button>
+<div class="cart" id="cart">0</div>
 </nav>
 
-<div class="hero">
-<h1>Upgrade Your Lifestyle</h1>
-<p>Premium Smart Products</p>
+<section class="hero">
+<h1>Future of Smart Living</h1>
+<p>Experience Premium Technology</p>
+<button class="btn">Shop Now</button>
+</section>
+
+<section class="products">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1518444065439-e933c06ce9cd">
+<h3>Wireless Earbuds</h3>
+<p class="price">$29</p>
+<button class="btn" onclick="add()">Add to Cart</button>
 </div>
 
-<div class="products">
-
-<div class="product">
+<div class="card">
 <img src="https://images.unsplash.com/photo-1585386959984-a41552231658">
 <h3>Smart Watch</h3>
-<p>$49</p>
-<button onclick="addToCart('Smart Watch')">Add</button>
+<p class="price">$49</p>
+<button class="btn" onclick="add()">Add to Cart</button>
 </div>
 
-<div class="product">
-<img src="https://images.unsplash.com/photo-1518444065439-e933c06ce9cd">
-<h3>Earbuds</h3>
-<p>$29</p>
-<button onclick="addToCart('Earbuds')">Add</button>
-</div>
-
-<div class="product">
+<div class="card">
 <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
-<h3>Speaker</h3>
-<p>$59</p>
-<button onclick="addToCart('Speaker')">Add</button>
+<h3>Smart Speaker</h3>
+<p class="price">$59</p>
+<button class="btn" onclick="add()">Add to Cart</button>
 </div>
 
-</div>
-
-<!-- CART -->
-<div class="cart-box" id="cartBox">
-<h3>Your Cart</h3>
-<ul id="items"></ul>
-
-<h4>Checkout</h4>
-<input placeholder="Name"><br><br>
-<input placeholder="Address"><br><br>
-
-<button onclick="order()">Order via WhatsApp</button>
-</div>
+</section>
 
 <footer>
-© 2026 Smart Gadgets Store
+© 2026 SmartGadgets | Premium Store
 </footer>
 
 <script>
 let count=0;
-let items=[];
-
-function addToCart(name){
-  count++;
-  items.push(name);
-  document.getElementById("count").innerText=count;
-
-  let li=document.createElement("li");
-  li.innerText=name;
-  document.getElementById("items").appendChild(li);
-}
-
-function toggleCart(){
-  let box=document.getElementById("cartBox");
-  box.style.display = box.style.display === "block" ? "none" : "block";
-}
-
-function order(){
-  let msg="Order:\\n"+items.join("\\n");
-  window.open("https://wa.me/?text="+encodeURIComponent(msg));
+function add(){
+count++;
+document.getElementById("cart").innerText=count;
 }
 </script>
 
