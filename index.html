@@ -3,56 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartGadgets Store</title>
+<title>Smart Gadgets Pro</title>
 
 <style>
 body {
     margin: 0;
     font-family: Arial;
-    background: #0f172a;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: white;
 }
 
 header {
-    padding: 20px;
     text-align: center;
-    background: linear-gradient(45deg,#6366f1,#9333ea);
+    padding: 20px;
+    background: #111;
     font-size: 24px;
-    font-weight: bold;
 }
 
 .hero {
     text-align: center;
-    padding: 60px 20px;
+    padding: 50px 20px;
 }
 
 .hero h1 {
     font-size: 40px;
 }
 
-.hero p {
-    color: #cbd5e1;
-}
-
-.btn {
-    background: #f43f5e;
-    padding: 12px 25px;
-    color: white;
+button {
+    background: #ff4b2b;
     border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 20px;
     cursor: pointer;
-    border-radius: 25px;
 }
 
 .products {
     display: flex;
-    gap: 20px;
-    padding: 40px;
     justify-content: center;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
-.card {
-    background: #1e293b;
+.product {
+    background: rgba(255,255,255,0.05);
     padding: 20px;
     border-radius: 15px;
     width: 250px;
@@ -60,20 +54,24 @@ header {
     transition: 0.3s;
 }
 
-.card:hover {
+.product:hover {
     transform: scale(1.05);
 }
 
-.price {
-    color: #f43f5e;
-    font-size: 20px;
+img {
+    width: 100%;
+    border-radius: 10px;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #020617;
+.cart {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: red;
+    padding: 10px;
+    border-radius: 50%;
 }
+
 </style>
 </head>
 
@@ -81,37 +79,45 @@ footer {
 
 <header>SmartGadgets 🚀</header>
 
+<div class="cart" id="cart">0</div>
+
 <section class="hero">
-<h1>Future of Smart Living</h1>
-<p>Premium gadgets for your smart lifestyle</p>
-<button class="btn">Shop Now</button>
+<h1>Upgrade Your Lifestyle</h1>
+<p>Best Smart Gadgets Available</p>
 </section>
 
 <section class="products">
 
-<div class="card">
-<h3>Smart LED Bulb</h3>
-<p class="price">$29</p>
-<button class="btn">Add to Cart</button>
+<div class="product">
+<img src="https://images.unsplash.com/photo-1585386959984-a41552231658">
+<h3>Smart Watch</h3>
+<p>$49</p>
+<button onclick="addToCart()">Add to Cart</button>
 </div>
 
-<div class="card">
-<h3>Security Camera</h3>
-<p class="price">$89</p>
-<button class="btn">Add to Cart</button>
+<div class="product">
+<img src="https://images.unsplash.com/photo-1518444065439-e933c06ce9cd">
+<h3>Wireless Earbuds</h3>
+<p>$29</p>
+<button onclick="addToCart()">Add to Cart</button>
 </div>
 
-<div class="card">
-<h3>Smart Thermostat</h3>
-<p class="price">$149</p>
-<button class="btn">Add to Cart</button>
+<div class="product">
+<img src="https://images.unsplash.com/photo-1580910051074-3eb694886505">
+<h3>Smart Speaker</h3>
+<p>$59</p>
+<button onclick="addToCart()">Add to Cart</button>
 </div>
 
 </section>
 
-<footer>
-<p>© 2026 SmartGadgets Store</p>
-</footer>
+<script>
+let count = 0;
+function addToCart(){
+    count++;
+    document.getElementById("cart").innerText = count;
+}
+</script>
 
 </body>
 </html>
